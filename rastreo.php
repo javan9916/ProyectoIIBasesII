@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Bases de datos II</title>
+    <title>Rastreo</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <?php require_once 'connectPG.php';?>
+    
     <div class="form">
         <div class="form-heading"><h1>Base de datos distribuida para rastreo</h1></div>
         <div class="form-heading"><h1>de servicios públicos de transporte</h1></div>
