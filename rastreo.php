@@ -1,3 +1,9 @@
+<?php
+    require_once('conexionPG.php');
+
+    $conexionPG = connectPG();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,10 +11,8 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    
     <div class="form">
-        <div class="form-heading"><h1>Base de datos distribuida para rastreo</h1></div>
-        <div class="form-heading"><h1>de servicios públicos de transporte</h1></div>
+        <div class="form-heading"><h1>Datos para el rastreo</h1></div>
         <form action="connectPG.php" method="POST">
             <label>Vehiculo: </label>
             <input name="vehiculo" class="form-input">
