@@ -1,8 +1,8 @@
 <?php
 
-$serverName = "serverName\sqlexpress"; //serverName\instanceName
-$connectionInfo = array( "Database"=>"dbName", "UID"=>"userName", "PWD"=>"password");
-$conn = sqlsrv_connect( $serverName, $connectionInfo);
+$serverName = "localhost"; //serverName\instanceName
+$connectionInfo = array( "Database"=>"prueba", "UID"=>"sa", "PWD"=>"2018107560", "CharacterSet"=>"UTF-8");
+$conn = sqlsrv_connect($serverName, $connectionInfo);
 
 if( $conn ) {
     // Hacer las consultas o inserciones en los servidores

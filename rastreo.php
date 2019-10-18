@@ -1,9 +1,4 @@
-<?php
-    require_once('conexionPG.php');
-
-    $conexionPG = connectPG();
-?>
-
+<?php require_once 'conexionPG.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,14 +8,14 @@
 <body>
     <div class="form">
         <div class="form-heading"><h1>Datos para el rastreo</h1></div>
-        <form action="connectPG.php" method="POST">
-            <label>Vehiculo: </label>
-            <input name="vehiculo" class="form-input">
+        <form action="conexionPG.php" method="POST">
+            <label>Nombre ruta: </label>
+            <input name="ruta" class="form-input">
             <label>Tipo de vehiculo: </label>
             <select name="tipo" class="form-select">
-                <option value="bus">Bus</option>
-                <option value="taxi">Taxi</option>
-                <option value="tren">Tren</option>
+                <option value="Bus">Bus</option>
+                <option value="Taxi">Taxi</option>
+                <option value="Tren">Tren</option>
             </select>
             <label>Usuario: </label>
             <input name="usuario" class="form-input">
