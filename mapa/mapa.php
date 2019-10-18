@@ -60,8 +60,8 @@
 </head>
 <body onload="mapa()">
     <div id="controles">
-        <!-- <div id="iniciar" onclick="iniciar_indicaciones()">Iniciar</div> -->
-        <!-- <div id="terminar" onclick="terminar_indicaciones()">Terminar</div> -->
+        <div id="iniciar" onclick="iniciar_indicaciones()">Iniciar</div>
+        <div id="terminar" onclick="terminar_indicaciones()">Terminar</div>
     </div>
     <div id="mapid"></div>
     <!-- <div id="log" onclick="repetir_indicaciones()"></div> -->

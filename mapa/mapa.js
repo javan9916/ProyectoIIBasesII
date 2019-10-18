@@ -98,9 +98,10 @@ function marca(pos) {
             }
         }; 
         
-        // let url="ruta_siguiente.php?x="+crd.latitude+"&y="+crd.longitude+"&bus="+bus+"&usuario="+usuario;
-        // xhttp.open("GET",url,true);  
-        // xhttp.send(); 
+        let url="guardar_ruta.php?x="+crd.latitude+"&y="+crd.longitude+"&bus="+bus+"&usuario="+usuario+
+                "&tipo="+tipo+"&database="+database+"&puerto="+puerto+"&usuariodb="+usuariodb+"password"+password;
+        xhttp.open("GET",url,true);  
+        xhttp.send(); 
     }
     
 };
