@@ -32,7 +32,7 @@ function openFullscreen(id) {
 
 function iniciar_indicaciones()
 {
-    habla("Iniciaremos tu recorrido");
+    habla("Start");
     estado_indicaciones=true;
 
 }
@@ -40,7 +40,7 @@ function iniciar_indicaciones()
 function terminar_indicaciones()
 {
     estado_indicaciones=false;
-    habla("Hemos Terminado")
+    habla("End")
     segmento_actual=-1;
     segmento_siguiente=-1;
     segmentos_siguientes=[];
@@ -48,13 +48,68 @@ function terminar_indicaciones()
     log=0;
 }
 
+function success(pos) {
+    var crd = pos.coords;
+
+    console.log('Posicion Actual:');
+    console.log('Latitud: ' + crd.latitude);
+    console.log('Longitud: ' + crd.longitude);
+    console.log('Al rededor de ' + crd.accuracy + ' meters.');
+
+    map = L.map('mapid').setView([crd.latitude, crd.longitude], 17);
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+        {
+            attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a>',
+            maxZoom: 19
+        }).addTo(map);
+
+    persona = L.marker([crd.latitude, crd.longitude],
+        {
+            icon: personaIcon,
+            alt: "Rastreo de Persona"
+        }).addTo(map);
+    persona.bindPopup("<a href='javascript:iniciar_indicaciones();'><butom> Inicio </butom></a>").openPopup();
+
+    map.locate({ setView: true, maxZoom: 19, enableHighAccuracy: true });
+
+};
+
+//carga el error en caso de no ponder capturar la posicion actual
+function error(err) {
+    console.warn('ERROR(' + err.code + '): ' + err.message);
+};
+
+function marca(pos) {
+    let crd = pos.coords;
+    console.log(crd.latitude, crd.longitude);
+    // map.removeLayer(persona);
+    // persona.setLatLng(new L.LatLng(crd.latitude, crd.longitude));
+    // persona.addTo(map);
+    console.log("entra1");
+    if (true)
+    {
+        console.log("entra2");
+        let xhttp =new XMLHttpRequest ();
+        xhttp.onreadystatechange= function()
+        {
+            if (this.readyState==4 && this.status==200)
+            {    
+                console.log(this.responseText); 
+            }
+        }; 
+        
+        // let url="ruta_siguiente.php?x="+crd.latitude+"&y="+crd.longitude+"&bus="+bus+"&usuario="+usuario;
+        // xhttp.open("GET",url,true);  
+        // xhttp.send(); 
+    }
+    
+};
+
 usuario=window.prompt("Nombre de usuario");
 bus=window.prompt("Nombre del bus");
 
-function main() 
-{   
-    cargar_rutas();
-
+function mapa() 
+{ 
     options =
         {
             enableHighAccuracy: true,
@@ -64,13 +119,9 @@ function main()
 
     personaIcon = L.icon(
         {
-            iconUrl: 'person.png',
-            shadowUrl: 'person-shadow.png', 
-
-            iconSize: [40, 40], // size of the icon
-            shadowSize: [40, 40], // size of the shadow
+            iconUrl: 'imagenes/poro.png', 
+            iconSize: [60, 60], // size of the icon
             iconAnchor: [0, 40], // point of the icon which will correspond to marker's location
-            shadowAnchor: [0, 40],  // the same for the shadow
             popupAnchor: [0, -40] // point from which the popup should open relative to the iconAnchor
         });
 
