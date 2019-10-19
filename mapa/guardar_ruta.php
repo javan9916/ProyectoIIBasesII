@@ -3,13 +3,10 @@ $bus=$_GET["vehiculo"];
 $usuario=$_GET["usuario"];
 $x=$_GET["x"];
 $y=$_GET["y"];
-$y=$_GET["tipo"];
-$y=$_GET["database"];
-$y=$_GET["puerto"];
-$y=$_GET["usuariodb"];
-$y=$_GET["password"];
+$tipo=$_GET["tipo"];
 
 
 $sql="insert into '$tipo'(bus,usuario,geom) values ('$bus','$usuario',ST_SetSRID(ST_MakePoint($y,$x),4326));";  
-$con = pg_connect("host=localhost port='$puerto' dbname='$database' user='$usuariodb' password='$password'");
+$con = pg_connect("host=localhost port=5433 dbname='$tipo' user=postgres password=24604763");
 $result=pg_query($con,$sql);
+//RECUERDEN CAMBIAR LOS DATOS DEL SERVIDOR Y PUERTO AQUI

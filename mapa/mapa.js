@@ -12,7 +12,7 @@ var segmento_siguiente=-1;
 var segmentos_siguientes=[];
 var txt_indicaciones="Iniciaremos tu recorrido";
 var estado_indicaciones=false;
-var usuario,bus;
+var usuario,vehiculo,tipo;
 
 function openFullscreen(id) {
     let e = document.getElementById(id);
@@ -81,6 +81,10 @@ function error(err) {
 
 function marca(pos) {
     let crd = pos.coords;
+    let vehiculo = this.vehiculo;
+    let usuario = this.usuario;
+    let tipo = this.tipo;
+
     console.log(crd.latitude, crd.longitude);
     // map.removeLayer(persona);
     // persona.setLatLng(new L.LatLng(crd.latitude, crd.longitude));
@@ -98,19 +102,22 @@ function marca(pos) {
             }
         }; 
         
-        let url="guardar_ruta.php?x="+crd.latitude+"&y="+crd.longitude+"&bus="+bus+"&usuario="+usuario+
-                "&tipo="+tipo+"&database="+database+"&puerto="+puerto+"&usuariodb="+usuariodb+"password"+password;
+        let url="guardar_ruta.php?x="+crd.latitude+"&y="+crd.longitude+
+                "&vehiculo="+vehiculo+"&usuario="+usuario+"&tipo="+tipo;
         xhttp.open("GET",url,true);  
         xhttp.send(); 
     }
     
 };
 
-usuario=window.prompt("Nombre de usuario");
-bus=window.prompt("Nombre del bus");
 
-function mapa() 
+
+function mapa(tipo,usuario,vehiculo) 
 { 
+    this.tipo = tipo;
+    console.log(tipo)
+    this.usuario = usuario;
+    this.vehiculo = vehiculo;
     options =
         {
             enableHighAccuracy: true,

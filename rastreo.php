@@ -1,4 +1,4 @@
-<?php require_once 'conexionPG.php'; ?>
+<?php //require_once 'mapa/mapa.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,7 +8,7 @@
 <body>
     <div class="form">
         <div class="form-heading"><h1>Datos para el rastreo</h1></div>
-        <form action="conexionPG.php" method="POST">
+        <form action="mapa/mapa.php" method="POST">
             <label>Nombre ruta: </label>
             <input name="ruta" class="form-input">
             <label>Tipo de vehiculo: </label>
