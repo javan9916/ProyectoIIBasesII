@@ -115,7 +115,6 @@ function marca(pos) {
 function mapa(tipo,usuario,vehiculo) 
 { 
     this.tipo = tipo;
-    console.log(tipo)
     this.usuario = usuario;
     this.vehiculo = vehiculo;
     options =
