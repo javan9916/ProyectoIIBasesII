@@ -8,19 +8,22 @@
 <body onload="main()">
     <div class="form">
         <div class="form-heading"><h1>Inicio Sesion</h1></div>
-        <form>
+        <form action="mapa/mapa.php" method="POST">
         <div class="form-group">
             <div class="form-inputs">
-                <label for="input_usuario">Email</label>
-                <input type="email" class="form-control" id="input_usuario" placeholder="ejemplo@correo.com">
-            </div>
-            <div class="form-inputs">
-                <label for="input_contraseña">Contrasña</label>
-                <input type="password" class="form-control" id="input_contraseña" placeholder="ejemplo123">
+                <label for="input_usuario">Usuario</label>
+                <input type="user" class="form-control" id="user" placeholder="usuario">
             </div>
         </div>
             <a href="../menu.php" class="btn btn-success">Iniciar Sesion</a>
         </form>
     </div>
+
+    <?php
+        $user = $_POST['user'];
+        $query = "select verificar_usuario($user)";
+        $resultado = pg_query();
+        
+    ?>
 </body>
 </html>
