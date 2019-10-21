@@ -79,6 +79,7 @@ $$
 		codigoVehiculo integer;
 		codigoUsuario integer;
 		cantidadVehiculo numeric;
+		cantidadUsuario numeric;
 	begin
 		EXECUTE format('
 					   select count(*) from '||TablaVehiculo||' 
@@ -88,6 +89,16 @@ $$
   			EXECUTE format('
 					   insert into '||TablaVehiculo||'(codigo, ruta) 
 					   values(nextval(''sec_taxis''),'''||vehiculo||''') ');
+		END IF;
+
+		EXECUTE format('
+					   select count(*) from usuarios
+					   where nombre = '''||usuario||''' ')
+		INTO cantidadUsuario;
+		IF cantidadUsuario<1 THEN
+  			EXECUTE format('
+					   insert into usuarios (nombre) 
+					   values('''||usuario||''')');
 		END IF;
 
 		EXECUTE format('select codigo from '||TablaVehiculo||' where ruta='''||vehiculo||'''')
