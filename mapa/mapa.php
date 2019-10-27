@@ -44,10 +44,9 @@
     $tipo;
     $usuario;
     $vehiculo;
-    if (isset($_POST['submit'])) {
-        $tipo=$_POST['tipo'];
-        $usuario=$_POST['usuario'];
-        $vehiculo=$_POST['ruta'];}
+    $tipo=$_POST['tipo'];
+    $usuario=$_POST['usuario'];
+    $vehiculo=$_POST['ruta'];
     // Mostar las variables
     echo " Tipo: $tipo";
     echo " Nombre: $usuario";

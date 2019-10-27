@@ -10,9 +10,9 @@ create sequence sec_taxis
 ------- TABLAS -------
 --drop table taxi
 create table taxi(
-	codigo	serial,
-	tipo	char(1)	     not null default 'T',
-	ruta 	varchar(200) not null,
+	codigo			serial,
+	tipo_vehiculo	char(1)	     not null default 'T',
+	ruta 			varchar(200) not null,
 	
 	constraint pk_codigo_taxi
 		primary key	(codigo)
@@ -125,7 +125,8 @@ $$
 				where(usuario=_usuario and vehiculo=_vehiculo and fecha between _fecha and now() )
 				order by fecha asc)
 		)into lines;
-		return QUERY select ST_Length(lines)/1000, ST_Transform(lines, 4326);
+		select tipo_vehiculo from Taxi where codigo=_vehiculo into el_tipo;
+		return QUERY select el_tipo, ST_Length(lines)/1000, ST_Transform(lines, 4326);
 end; $$
 language plpgsql;
 --Procedimiento almacenado para transferir la ruta y la distancia--
