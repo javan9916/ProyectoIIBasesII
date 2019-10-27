@@ -2,18 +2,26 @@
 <html lang="en">
 <head>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="styles.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Consultas</title>
 </head>
 <body>
+    <nav class="navbar navbar-dark bg-dark">>
+    <a class="navbar-brand" href="../index.php">
+        Volver
+    </a>
+    <a class="navbar-brand" href="../index.php">
+        Actualizar información
+    </a>
+    </nav>
     <div class="container">
     <br>
     <br>
         <div class="row">
             <div class="card" style="margin-right: 20px;">
+
                 <div class="card-body" style="width: 520px; text-align: center;">
                     <h5 class="card-title">Detalle de rutas de vehículos por tipo de servicio de transporte</h5>
                     <div class="col-md">
@@ -102,44 +110,97 @@
             </div>
             
             <div class="card" style="top: 20px;">
-                <div class="card-body" style="width: 520px; text-align: center;">
-                    <h5 class="card-title">Usuarios con mayor número de rastreos</h5>
-                    <div class="col-md">
-                        <div class="form-group">
-                            <input type="date" id="start_cons2" name="start_cons2"
-                                    value="2019-10-25"
-                                    min="2010-01-01" max="2030-12-31">
-                            <input type="date" id="end_cons2" name="end_cons2"
-                                    value="2019-10-25"
-                                    min="2010-01-01" max="2030-12-31">
+                <form action="" method="POST">
+                    <div class="card-body" style="width: 520px; text-align: center;">
+                        <h5 class="card-title">Usuarios con mayor número de rastreos</h5>
+                        <div class="col-md">
+                            <div class="form-group">
+                                <input type="date" id="fechaI" name="fechaI"
+                                        value="2019-10-25"
+                                        min="2010-01-01" max="2030-12-31">
+                                <input type="date" id="fechaF" name="fechaF"
+                                        value="2019-10-25"
+                                        min="2010-01-01" max="2030-12-31">
+                            </div>
+                            <table class="table">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <th scope="col">Usuario</th>
+                                        <th scope="col">Número de rastreos</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                        $serverName = "localhost"; //serverName\instanceName
+                                        $connectionInfo = array( "Database"=>"Nodo_Central", "UID"=>"sa", "PWD"=>"2018107560", "CharacterSet"=>"UTF-8");
+                                        
+                                        $fechaI;
+                                        $fechaF;
+
+                                        if (isset($_POST['sub4'])) {
+                                            $fechaI=date_create($_POST['fechaI']);
+                                            $fechaF=date_create($_POST['fechaF']);
+                                            $fechaI=date_format($fechaI, 'm-d-Y H:i:s');
+                                            $fechaF=date_format($fechaF,'m-d-Y H:i:s');
+                                
+                                            $conn = sqlsrv_connect($serverName, $connectionInfo);
+                                            $sql = "exec usuarios_mayor_rastreos '$fechaI', '$fechaF'";
+                                            $result = sqlsrv_query($conn, $sql);
+
+                                            if($result == FALSE)
+                                                die(FormatErrors(sqlsrv_errors()));
+                                            while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
+                                                echo '<tr scope="row">';
+                                                echo '<td>'. $row['usuario'] .'</td>';
+                                                echo '<td>'. $row['cantidad'] . '</td>';
+                                                echo '</tr>';
+                                            }
+                                        }
+                                    ?>
+                                </tbody>
+                            </table>
+                            <button type="submit" class="btn btn-primary" name="sub4" href="#">Consultar</button>
                         </div>
-                        <table class="table">
-                            <thead class="thead-light">
-                                <tr>
-                                <th scope="col">Usuario</th>
-                                <th scope="col">Número de rastreos</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr scope="row">
-                                    <td>Mark</td>
-                                    <td>10</td>
-                                </tr>
-                                <tr scope="row">
-                                    <td>Lucy</td>
-                                    <td>9</td>
-                                </tr>
-                                <tr scope="row">
-                                    <td>John</td>
-                                    <td>5</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <button type="button" class="btn btn-primary">Consultar</button>
                     </div>
-                </div>
+                </form>   
             </div>
         </div>
     </div>
+
+    <?php
+        //$serverName = "localhost"; //serverName\instanceName
+        //$connectionInfo = array( "Database"=>"Nodo_Central", "UID"=>"sa", "PWD"=>"2018107560", "CharacterSet"=>"UTF-8");
+
+        
+        $nombre;
+        $vehiculo;
+        $tipo;
+
+        function FormatErrors( $errors ){
+            /* Display errors. */
+            echo "Error information: ";
+
+            foreach ( $errors as $error )
+            {
+                echo "SQLSTATE: ".$error['SQLSTATE']."";
+                echo "Code: ".$error['code']."";
+                echo "Message: ".$error['message']."";
+            }
+        }
+
+        /*if (isset($_POST['sub4'])) {
+            $fechaI=$_POST['fechaI'];
+            $fechaF=$_POST['fechaF'];
+
+            $conn = sqlsrv_connect($serverName, $connectionInfo);
+            $sql = "exec usuariosMayorNumeroRastreos '$fechaI', '$fechaF'";
+        }*/
+        
+    ?>
+
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </body>
 </html>

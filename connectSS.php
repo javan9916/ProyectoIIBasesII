@@ -1,6 +1,6 @@
 <?php
 $serverName = "localhost"; //serverName\instanceName
-$connectionInfo = array( "Database"=>"prueba", "UID"=>"sa", "PWD"=>"2018107560", "CharacterSet"=>"UTF-8");
+$connectionInfo = array( "Database"=>"Nodo_Central", "UID"=>"sa", "PWD"=>"2018107560", "CharacterSet"=>"UTF-8");
 $conn = sqlsrv_connect($serverName, $connectionInfo);
 
 if( $conn ) {
