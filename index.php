@@ -12,7 +12,7 @@
                 <br>
                 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
                 <a href="rastreo.php" class="btn btn-success">Hacer un rastreo</a>
-                <a href="consultas.php" class="btn btn-success">Hacer consultas</a>
+                <a href="consultas/consultas.php" class="btn btn-success">Hacer consultas</a>
             </form>
         </div>
     </div>

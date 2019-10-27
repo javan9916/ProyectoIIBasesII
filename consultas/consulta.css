@@ -1,0 +1,26 @@
+.card{
+    text-align: center;
+    margin: 0 auto;
+    max-width: 600px;
+}
+
+.dropdown{
+	max-width: 100px;
+}
+
+label {
+    display: block;
+    font: 1rem 'Fira Sans', sans-serif;
+}
+
+input,label {
+    margin: .4rem 0;
+}
+
+.consultar {
+	width: 100%;
+}
+
+.margin{
+	margin: 10px;
+}

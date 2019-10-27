@@ -79,7 +79,6 @@ $$
 		codigoVehiculo integer;
 		codigoUsuario integer;
 		cantidadVehiculo numeric;
-		cantidadUsuario numeric;
 	begin
 		EXECUTE format('
 					   select count(*) from '||TablaVehiculo||' 
@@ -89,16 +88,6 @@ $$
   			EXECUTE format('
 					   insert into '||TablaVehiculo||'(codigo, ruta) 
 					   values(nextval(''sec_buses''),'''||vehiculo||''') ');
-		END IF;
-
-		EXECUTE format('
-					   select count(*) from usuarios
-					   where nombre = '''||usuario||''' ')
-		INTO cantidadUsuario;
-		IF cantidadUsuario<1 THEN
-  			EXECUTE format('
-					   insert into usuarios (nombre) 
-					   values('''||usuario||''')');
 		END IF;
 
 		EXECUTE format('select codigo from '||TablaVehiculo||' where ruta='''||vehiculo||'''')
@@ -120,3 +109,23 @@ $$
 $$
 language plpgsql;
 --Procedimiento almacenado para guardar una ruta--
+
+--Procedimiento almacenado para transferir la ruta--
+create or replace function distance(_usuario int, _vehiculo int, _fecha timestamp)
+	returns table(dist float, geom geometry) 
+as
+$$
+	declare
+		lines geometry;
+	begin
+		select ST_MakeLine(
+			array(
+				select ST_Centroid(ST_Transform(posicion,5367))
+				from rastreo_Tren
+				where(usuario=_usuario and vehiculo=_vehiculo and fecha between _fecha and now() )
+				order by fecha asc)
+		)into lines;
+		return QUERY select ST_Length(lines)/1000, ST_Transform(lines, 4326);
+end; $$
+language plpgsql;
+--Procedimiento almacenado para transferir la ruta y la distancia--
