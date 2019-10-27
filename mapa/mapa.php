@@ -40,7 +40,7 @@
     </style>
 </head>
 <?php
-    //Obterner las variable
+    //Obterner las variables
     $tipo;
     $usuario;
     $vehiculo;

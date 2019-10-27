@@ -1,15 +1,17 @@
 <?php
-    //Obterner las variable
+    //Obtener las variable
     $usuario;
     $vehiculo;
     $fechaI;
     $fechaF;
-    if (isset($_POST['submit'])) {
-        $usuario=$_POST['usuario'];
-        $vehiculo=$_POST['ruta'];
-        $fechaI=$_POST['fechaI'];
-        $fechaF=$_POST['fechaF'];}
-    // Mostar las variables
-    echo " Nombre: $usuario";
-    echo " Vehiculo: $vehiculo";
+    function obtenerFechas() {
+        if (isset($_POST['submit'])) {
+            $fechaI=$_POST['fechaI'];
+            $fechaF=$_POST['fechaF'];
+        }
+        echo " Fecha I: $fechaI";
+        echo " Fecha F: $fechaF";
+    }
+    // Mostrar las variables
+    
 ?>
