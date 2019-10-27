@@ -64,7 +64,7 @@ $$
 language plpgsql;
 ----PROCEDIMIENTOS ALMACENADOS PARA CREACIÓN----
 
---PROCEDIMIENTOS ALMACENADOS PARA GRUARDAR UNA RUTA--
+--PROCEDIMIENTOS ALMACENADOS PARA GUARDAR UNA RUTA--
 create or replace function agregar_ruta(
 	tipo varchar,
 	usuario varchar,
