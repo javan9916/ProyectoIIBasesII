@@ -50,3 +50,24 @@ as
 	group by rf.usuario;
 
 exec usuarios_mayor_rastreos '10-20-2019 00:00:00', '10-25-2019 00:00:00'
+
+--create nonclustered index idx_tipo_registro on registro(tipo)
+
+create proc rutas_tipo 
+@fechaI as datetime, @fechaF as datetime, @tipo as char(1)
+as
+	declare @registros_t table(
+		ruta	text,
+		tipo	char(1) not null,
+		fecha datetime not null
+	);
+
+	insert into @registros_t
+	select ruta, tipo, fecha_inicio
+	from registro where tipo = @tipo
+
+	select ruta, tipo
+	from @registros_t
+	where fecha between @fechaI and @fechaF;
+
+exec rutas_tipo '10-25-2019 00:00:00', '10-20-2019 00:00:00', 'B'
