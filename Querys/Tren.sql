@@ -9,6 +9,7 @@ create sequence sec_tren
 
 ------- TABLAS -------
 --drop table tren
+-- Tabla tren --
 create table tren(
 	codigo			serial,
 	tipo_vehiculo	char(1)	     not null default 'S',
@@ -18,6 +19,7 @@ create table tren(
 		primary key	(codigo)
 );
 
+-- Tabla de usuarios --
 create table usuarios
 (
 	codigo serial,
@@ -30,6 +32,7 @@ create table usuarios
 create extension postgis;
 
 --drop table rastreo_Tren
+-- Tabla de rastreos del tren --
 create table rastreo_Tren 
 (
 	codigo 		serial,
@@ -50,6 +53,8 @@ SELECT AddGeometryColumn ('public','rastreo_tren','geom',4326,'POINT',2,false);
 ------- TABLAS -------
 
 ----PROCEDIMIENTOS ALMACENADOS PARA CREACIÓN----
+
+-- Procedimiento para agregar tren en su tabla --
 create or replace function agregar_tren(v_ruta varchar(200)) returns void
 as
 $$ 

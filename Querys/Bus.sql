@@ -9,6 +9,7 @@ create sequence sec_buses
 
 ------- TABLAS -------
 --drop table bus
+-- Tabla bus --
 create table Bus(
 	codigo			serial,
 	tipo_vehiculo	char(1)	     not null default 'B',
@@ -18,6 +19,7 @@ create table Bus(
 		primary key	(codigo)
 );
 
+-- Tabla de usuarios --
 create table usuarios
 (
 	codigo serial,
@@ -30,6 +32,7 @@ create table usuarios
 create extension postgis;
 
 --drop table rastreo_Bus
+-- Tabla de rastreos del bus --
 create table rastreo_Bus 
 (
 	codigo 		serial,
@@ -50,6 +53,7 @@ SELECT AddGeometryColumn ('public','rastreo_bus','geom',4326,'POINT',2,false);
 ------- TABLAS -------
 
 ----PROCEDIMIENTOS ALMACENADOS PARA CREACIÓN----
+-- Procedimiento para agregar tren en su tabla --
 create or replace function agregar_bus(v_ruta varchar(200)) returns void
 as
 $$ 

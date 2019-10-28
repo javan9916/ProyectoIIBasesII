@@ -7,6 +7,7 @@
     $tipo;
     $vehiculo;
 
+    // procedimiento de la primera consulta
     if (isset($_POST['sub1'])) {
         $fechaI=date_create($_POST['fechaI']);
         $fechaF=date_create($_POST['fechaF']);
@@ -50,8 +51,11 @@
         sqlsrv_free_stmt($result);
     }
 
+    // procedimiento de la segunda consulta
     if (isset($_POST['sub2'])) {
         $vehiculo=$_POST['vehiculo'];
+
+        echo $vehiculo;
 
         $myparams['v'] = $vehiculo;
 
@@ -82,6 +86,7 @@
         sqlsrv_free_stmt($result);
     }
 
+    // procedimiento de la cuarta consulta
     if (isset($_POST['sub4'])) {
         $fechaI=date_create($_POST['fechaI']);
         $fechaF=date_create($_POST['fechaF']);
