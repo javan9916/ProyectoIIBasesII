@@ -112,11 +112,12 @@ language plpgsql;
 
 --Procedimiento almacenado para transferir la ruta--
 create or replace function distance(_usuario int, _vehiculo int, _fecha timestamp)
-	returns table(dist float, geom geometry) 
+	returns table(tipo char(1), dist float, geom geometry) 
 as
 $$
 	declare
 		lines geometry;
+		el_tipo char(1);
 	begin
 		select ST_MakeLine(
 			array(
@@ -130,3 +131,87 @@ $$
 end; $$
 language plpgsql;
 --Procedimiento almacenado para transferir la ruta y la distancia--
+
+--Procedimiento almacenado para transferir fecha Inicio--
+create or replace function fechaInicio(_usuario int, _vehiculo int)
+	returns table(momento timestamp)
+as
+$$
+	declare
+		momento timestamp;
+	begin
+		select fecha 
+		from rastreo_Tren where(usuario=_usuario and vehiculo=_vehiculo) 
+		into momento
+		order by fecha
+		LIMIT 1;
+		return QUERY select momento;
+end; $$
+language plpgsql;
+--Procedimiento almacenado para transferir fecha Inicio--
+
+--Procedimiento almacenado para transferir fecha Final--
+create or replace function fechaFinal(_usuario int, _vehiculo int)
+	returns table(momento timestamp)
+as
+$$
+	declare
+		momento timestamp;
+	begin
+		select fecha 
+		from rastreo_Tren where(usuario=_usuario and vehiculo=_vehiculo) 
+		into momento
+		order by fecha desc
+		LIMIT 1;
+		return QUERY select momento;
+end; $$
+language plpgsql;
+--Procedimiento almacenado para transferir fecha Final--
+
+
+--Procedimiento almacenado para transferir distancia--
+create or replace function distancia(_usuario int, _vehiculo int)
+	returns table(dist float)
+as
+$$
+	declare
+		lines geometry;
+	begin
+		select ST_MakeLine(
+			array(
+				select ST_Centroid(ST_Transform(posicion,5367))
+				from rastreo_Tren
+				where(usuario=_usuario and vehiculo=_vehiculo)
+				order by fecha asc)
+		)into lines;
+		return QUERY select ST_Length(lines)/1000;
+end; $$
+language plpgsql;
+--Procedimiento almacenado para transferir distancia--
+
+--Procedimiento almacenado para transferir ruta--
+create or replace function ruta(_usuario int, _vehiculo int)
+	returns table(ruta text)
+as
+$$
+	declare
+		lines geometry;
+	begin
+		select ST_MakeLine(
+			array(
+				select ST_Centroid(ST_Transform(posicion,5367))
+				from rastreo_Tren
+				where(usuario=_usuario and vehiculo=_vehiculo)
+				order by fecha asc)
+		)into lines;
+		return QUERY select ST_AsText(ST_Transform(lines, 4326));
+end; $$
+language plpgsql;
+--Procedimiento almacenado para transferir ruta--
+
+--ejemplos---------------------------------------
+select distance(11,44,'2019-10-20 03:23:09')
+select fechaInicio(11,44) 
+select fechaFinal(11,44)  
+select distancia(11,44) 
+select ruta(11,44)
