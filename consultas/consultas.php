@@ -45,34 +45,17 @@
             </div>
             <div class="card" >
             <br>
-                <div class="card-body" style="width: 520px; text-align: center;">
-                    <h5 class="card-title">Promedio de distancia diaria recorrida por bus</h5>
-                    <div class="col-md">
-                        <table class="table">
-                            <thead class="thead-light">
-                                <tr>
-                                <th scope="col">Bus</th>
-                                <th scope="col">Promedio distancia diaria recorrida</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr scope="row">
-                                    <td>Limón-Shangai</td>
-                                    <td>10km</td>
-                                </tr>
-                                <tr scope="row">
-                                    <td>CQ-Parrita</td>
-                                    <td>14km</td>
-                                </tr>
-                                <tr scope="row">
-                                    <td>Puerto Viejo-Disneylandia</td>
-                                    <td>16km</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <button type="button" class="btn btn-primary">Consultar</button>
+                <form action="mostrar_consultas.php" method="POST">
+                    <div class="card-body" style="width: 520px; text-align: center;">
+                        <h5 class="card-title">Promedio de distancia diaria recorrida por bus</h5>
+                        <div class="col-md">
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="vehiculo" name="vehiculo" placeholder="Nombre del vehiculo">
+                            </div>
+                            <button type="submit" name="sub2" class="btn btn-primary" href="#">Consultar</button>
+                        </div>
                     </div>
-                </div>
+                </form>
             </div>
         </div>
         <div class="row">
