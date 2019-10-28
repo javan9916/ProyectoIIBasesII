@@ -1,0 +1,13 @@
+Plan de optimización de consultas
+
+Para la optimización de los procedimientos almacenados que se crearon para realizar las consultas
+se hicieron varios indices que servirían para poder acceder a los datos de una manera más ágil.
+A continuación un listado de estos y su funcionalidad:
+
+-idx_fecha_registro: este índice indexa las fechas de la tabla de registro de manera no agrupada,
+			se utiliza en la consulta 1 y 4 en las cuales hay que buscar valores entre dos fechas
+			dadas, de esta manera al buscar en la tabla las fechas lo hará de una mejor manera.
+
+-idx_tipo_registro: este índice indexa los tipos de vehicula de la tabla de registro de manera no agrupada,
+			se utiliza en la consulta 1 y 2 en las cuales hay que seleccionar varios elementos
+			según el tipo y al hacerlo con un índice se optimizará la consulta.

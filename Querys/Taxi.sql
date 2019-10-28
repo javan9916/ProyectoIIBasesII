@@ -9,6 +9,7 @@ create sequence sec_taxis
 
 ------- TABLAS -------
 --drop table taxi
+-- Tabla taxi --
 create table taxi(
 	codigo			serial,
 	tipo_vehiculo	char(1)	     not null default 'T',
@@ -18,6 +19,7 @@ create table taxi(
 		primary key	(codigo)
 );
 
+-- Tabla de usuarios --
 create table usuarios
 (
 	codigo serial,
@@ -30,6 +32,8 @@ create table usuarios
 create extension postgis;
 
 --drop table rastreo_Taxi
+
+-- Tabla de rastreos de taxi --
 create table rastreo_Taxi 
 (
 	codigo 		serial,
@@ -50,6 +54,7 @@ SELECT AddGeometryColumn ('public','rastreo_taxi','geom',4326,'POINT',2,false);
 ------- TABLAS -------
 
 ----PROCEDIMIENTOS ALMACENADOS PARA CREACIÓN----
+-- Procedimiento para agregar taxi en su tabla --
 create or replace function agregar_taxi(v_ruta varchar(200)) returns void
 as
 $$ 

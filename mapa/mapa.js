@@ -111,7 +111,6 @@ function marca(pos) {
 };
 
 
-
 function mapa(tipo,usuario,vehiculo) 
 { 
     this.tipo = tipo;
