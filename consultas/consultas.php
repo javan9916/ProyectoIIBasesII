@@ -20,6 +20,7 @@
     <br>
     <br>
         <div class="row">
+            <!-- Consulta 1 -->
             <div class="card" style="margin-right: 20px;">
                 <form action="mostrar_consultas.php" method="POST">
                     <div class="card-body" style="width: 520px; text-align: center;">
@@ -43,6 +44,7 @@
                     </div>
                 </form>
             </div>
+            <!-- Consulta 2 -->
             <div class="card" >
             <br>
                 <form action="mostrar_consultas.php" method="POST">
@@ -59,6 +61,7 @@
             </div>
         </div>
         <div class="row">
+            <!-- Consulta 3 -->
             <div class="card" style="top: 20px; margin-right: 20px;">
                 <div class="card-body" style="width: 520px; text-align: center;">
                     <h5 class="card-title">Tiempos totales anuales de rastreo para un vehículo determinado</h5>
@@ -70,7 +73,7 @@
                     </div>
                 </div>
             </div>
-            
+            <!-- Consulta 4 -->
             <div class="card" style="top: 20px;">
                 <form action="mostrar_consultas.php" method="POST">
                     <div class="card-body" style="width: 520px; text-align: center;">

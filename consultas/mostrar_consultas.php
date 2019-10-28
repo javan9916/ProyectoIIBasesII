@@ -1,4 +1,5 @@
 <?php
+    //parámetros de la base de datos Nodo_Central
     $serverName = "localhost"; //serverName\instanceName
     $connectionInfo = array( "Database"=>"Nodo_Central", "UID"=>"sa", "PWD"=>"2018107560", "CharacterSet"=>"UTF-8");
                                         
@@ -117,6 +118,7 @@
         sqlsrv_free_stmt($result);
     }
 
+    // funcion para darle formato a los errores
     function FormatErrors( $errors ){
         /* Display errors. */
         echo "Error information: ";
